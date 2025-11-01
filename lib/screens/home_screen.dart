@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:app_contador/screens/info_screen.dart'; 
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -30,12 +32,26 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() { _count = 0; });
   }
 
+  void _navigateToInfo() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const InfoScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Contador Playstation'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            tooltip: 'Info del Dev',
+            onPressed: _navigateToInfo, 
+          ),
+        ],
       ),
       
       body: Center(
@@ -58,11 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildPSButton(
-            onPressed: _increment, 
-            color: Colors.green.shade700, 
+            onPressed: _increment,
+            color: Colors.green.shade700,
             icon: Icons.change_history, 
             tooltip: 'Sumar (+1)'
-          ),
+            ),
+          
           const SizedBox(width: 12),
 
           _buildPSButton(
@@ -70,28 +87,34 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.pink.shade600, 
             icon: Icons.check_box_outline_blank, 
             tooltip: 'Restar (-1)'
-          ),
+            ),
+
           const SizedBox(width: 12),
 
-          _buildPSButton(onPressed: _multiply, 
-          color: Colors.red.shade700, 
-          icon: Icons.circle_outlined, 
-          tooltip: 'Multiplicar (*2)'
-          ),
+          _buildPSButton(
+            onPressed: _multiply, 
+            color: Colors.red.shade700, 
+            icon: Icons.circle_outlined, 
+            tooltip: 'Multiplicar (*2)'
+            ),
+
           const SizedBox(width: 12),
 
-          _buildPSButton(onPressed: _divide, 
-          color: const Color(0xFF0070D1), 
-          icon: Icons.clear, 
-          tooltip: 'Dividir (/2)'
-          ),
+          _buildPSButton(
+            onPressed: _divide, 
+            color: const Color(0xFF0070D1), 
+            icon: Icons.clear, 
+            tooltip: 'Dividir (/2)'
+            ),
+
           const SizedBox(width: 12),
 
-          _buildPSButton(onPressed: _reset, 
-          color: Colors.grey.shade800, 
-          icon: Icons.refresh, 
-          tooltip: 'Reset (0)'
-          ),
+          _buildPSButton(
+            onPressed: _reset, 
+            color: Colors.grey.shade800, 
+            icon: Icons.refresh, 
+            tooltip: 'Reset (0)'
+            ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
